@@ -3,7 +3,6 @@ package com.zhao.example.consumer;
 
 import com.zhao.example.common.model.User;
 import com.zhao.example.common.service.UserService;
-import com.zhao.rpc.proxy.ServiceProxy;
 import com.zhao.rpc.proxy.ServiceProxyFactory;
 
 /**

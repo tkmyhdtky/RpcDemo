@@ -2,6 +2,7 @@ package com.zhao.rpc.proxy;
 
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
+import com.zhao.rpc.RpcApplication;
 import com.zhao.rpc.model.RpcRequest;
 import com.zhao.rpc.model.RpcResponse;
 import com.zhao.rpc.serializer.JdkSerializer;
@@ -40,9 +41,10 @@ public class ServiceProxy implements InvocationHandler {
             // 序列化
             System.out.println("请求序列化");
             byte[] bodyBytes = serializer.serialize(rpcRequest);
+            String url = "http://localhost:" + RpcApplication.getRpcConfig().getServerPort();
             // 发送请求
             // todo 注意，这里地址被硬编码了（需要使用注册中心和服务发现机制解决）
-            try (HttpResponse httpResponse = HttpRequest.post("http://localhost:8080")
+            try (HttpResponse httpResponse = HttpRequest.post(url)
                     .body(bodyBytes)
                     .execute()) {
                 byte[] result = httpResponse.bodyBytes();
